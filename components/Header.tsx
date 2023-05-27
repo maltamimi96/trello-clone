@@ -1,12 +1,18 @@
+"use client"
 import Image from "next/image"
 import React from "react"
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+import { MagnifyingGlassIcon, UserCircleIcon } from "@heroicons/react/24/solid"
+import Avatar from "react-avatar"
 type Props = {}
 
 const Header = (props: Props) => {
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center p-5 bg-gray-500/10 rounded-xl">
+        <div
+          className="absolute top-0 left-0 h-96 bg-gradient-to-br from-pink-400 to-[#0055D1] rounded-md filter
+        blur-3xl opacity-50 w-full -z-50"
+        />
         <Image
           src="http://links.papareact.com/c2cdd5"
           alt="Trello logo"
@@ -15,7 +21,7 @@ const Header = (props: Props) => {
           className="w-44 md:w-56 pb-10 md:pb-0 object-contain"
         />
 
-        <div className="flex">
+        <div className="flex items-center space-x-5 flex-1 justify-end w-full">
           <form
             action=""
             className="flex items-center space-x-5 bg-white rounded-md shadow-md flex-1 md:flex-initial">
@@ -29,7 +35,14 @@ const Header = (props: Props) => {
               Search
             </button>
           </form>
+          <Avatar name="Mohammad" round color="#0055D1" size="50" />
         </div>
+      </div>
+      <div className="flex items-center justify-center px-5 md:py-5">
+        <p className="flex items-center text-sm bg-white  max-w-3xl italic drop-shadow-lg rounded-full px-4 py-2 ">
+          <UserCircleIcon className="inline-block h-10 w-10  text-[#0055D1] mr-1" />
+          gpt is summarizing your tasks....
+        </p>
       </div>
     </header>
   )
