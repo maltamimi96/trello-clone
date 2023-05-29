@@ -12,10 +12,10 @@ interface Todo {
   $createdAt: string
   title: string
   status: TypedColumn
-  image?: string
+  image?: Image // Update the type to Image
 }
 
-interface image {
+interface Image {
   bucketId: string
   fileId: string
 }
