@@ -30,13 +30,15 @@ const Column = ({ id, todos, index }: Props) => {
             {(provided, snapshot) => (
               <div
                 className={`p-2 rounded-2xl shadow-sm ${
-                  snapshot.isDraggingOver ? "bg-green-200" : "bg-white/50"
+                  snapshot.isDraggingOver
+                    ? "bg-green-200 dark:bg-gray-400"
+                    : "bg-white/50 dark:bg-gray-600"
                 }`}
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
-                <h2 className="flex justify-between  tracking-widest md:ml-4 text-xl">
+                <h2 className="flex justify-between  tracking-widest md:ml-4 text-xl dark:text-gray-200 mb-2 ">
                   {idToColumnText[id]}
-                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm">
+                  <span className="text-gray-500   dark:text-red-500    text-sm font-semibold">
                     {!searchString
                       ? todos.length
                       : todos.filter((todo) =>
@@ -48,7 +50,7 @@ const Column = ({ id, todos, index }: Props) => {
                 </h2>
                 <div className="space-y-2 ">
                   {todos.length < 1 ? (
-                    <div className="text-gray-500 text-center text-xl tracking-widest">
+                    <div className="text-gray-500 dark:text-gray-300 text-center text-xl tracking-widest">
                       No tasks
                     </div>
                   ) : (

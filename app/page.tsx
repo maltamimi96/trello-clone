@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <main className="">
       <Header />
-      <Board />
+      <div className="px-2 md:p-0">
+        <Board />
+      </div>
     </main>
   )
 }

@@ -44,7 +44,7 @@ const TodoCard = ({
 
   return (
     <div
-      className="bg-white rounded-sm space-y-2 drop-shadow-md"
+      className="bg-white dark:bg-gray-900 dark:text-red-500  rounded-sm space-y-2 drop-shadow-md"
       {...draggableProps}
       {...dragHandleProps}
       ref={innerRef}>
@@ -57,12 +57,12 @@ const TodoCard = ({
 
       {/* // goes here */}
       {imageUrl && (
-        <div className=" w-full h-full rounded-b-md">
+        <div className=" w-full h-full  rounded-b-md">
           <Image
             src={imageUrl}
             alt="task image"
             width={400}
-            height={200}
+            height={100}
             className="w-full object-contain rounded-b-sm"
           />
         </div>
