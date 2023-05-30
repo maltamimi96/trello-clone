@@ -25,9 +25,14 @@ const Modal = (props: Props) => {
   const imagePickerRef = useRef<HTMLInputElement>(null)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // if (!newTaskInput) return
+    if (!newTaskInput) return
     addTask(newTaskInput, newTaskType, image)
-
+    setImage(null)
+    closeModal()
+  }
+  const handleCancel = () => {
+    newTaskInput && setNewTaskInput("")
+    setImage(null)
     closeModal()
   }
   return (
@@ -47,8 +52,8 @@ const Modal = (props: Props) => {
           leaveTo="opacity-0">
           <div className="fixed inset-0 bg-black opacity-25" />
         </Transition.Child>
-        <div className="fixed inset-0 overflow-auto ">
-          <div className="flex min-h-full items-center justify-center p-6 text-center">
+        <div className="fixed inset-0 overflow-auto  ">
+          <div className="flex min-h-full items-center justify-center p-6 text-center ">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -57,7 +62,7 @@ const Modal = (props: Props) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100"
               leaveTo="opacity-0">
-              <Dialog.Panel className="w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+              <Dialog.Panel className="w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white dark:bg-gray-700 dark:text-red-500 shadow-xl rounded-2xl">
                 <Dialog.Title
                   as="h3"
                   className={"text-md font-medium leading-6 text-gray-900"}>
@@ -68,7 +73,7 @@ const Modal = (props: Props) => {
                     type="text"
                     onChange={(e) => setNewTaskInput(e.target.value)}
                     placeholder="Enter Task Name..."
-                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none active:outline-none focus:ring-1 focus:ring-blue-500 focus:border-m sm:text-sm"
+                    className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm  dark:bg-gray-600 placeholder:dark:text-gray-300 active:dark:bg-gray-600 dark:text-red-400 appearance-none focus:outline-none active:outline-none focus:ring-1 focus:ring-blue-500 focus:border-m sm:text-sm"
                     value={newTaskInput}
                   />
                 </div>
@@ -103,12 +108,18 @@ const Modal = (props: Props) => {
                     }}
                   />
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 space-x-2">
                   <button
                     type="submit"
                     disabled={!newTaskInput}
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-slate-100 disabled:text-gray-300 disabled:cursor-not-allowed">
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 dark:bg-gray-800  px-4 py-2 text-sm dark:text-red-500 font-semibold text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-slate-100 disabled:text-gray-300 disabled:cursor-not-allowed">
                     Add Task
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    className="inline-flex justify-center rounded-md border border-transparent  px-4 py-2 text-sm dark:text-cyan-500 font-semibold text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:bg-slate-100 disabled:text-gray-300 disabled:cursor-not-allowed">
+                    Cancel
                   </button>
                 </div>
               </Dialog.Panel>

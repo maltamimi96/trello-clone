@@ -44,9 +44,9 @@ const TaskTypeRadioGroup = (props: Props) => {
                 key={type.id}
                 value={type.id}
                 className={({ active, checked }) =>
-                  `active:border-none transition ease-in-out duration-200${
+                  `active:border-none transition ease-in-out duration-200 ${
                     active
-                      ? "ring-2 ring-offset-2 ring-offset-sky-300 ring-white ring-opacity-60 active:border-none transition ease-in-out duration-200"
+                      ? "ring-2 ring-offset-2 ring-offset-sky-300  ring-white ring-opacity-60 active:border-none transition ease-in-out duration-200"
                       : ""
                   }
                             ${
