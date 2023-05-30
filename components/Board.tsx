@@ -17,7 +17,6 @@ const Board = (props: Props) => {
   useEffect(() => {
     getBoard()
   }, [getBoard])
-  console.log(board)
   const handleOnDragEnd = (result: DropResult) => {
     const { destination, source, draggableId, type } = result
 

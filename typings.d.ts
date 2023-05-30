@@ -12,7 +12,7 @@ interface Todo {
   $createdAt: string
   title: string
   status: TypedColumn
-  image?: Image // Update the type to Image
+  image?: string // Update the type to Image
 }
 
 interface Image {

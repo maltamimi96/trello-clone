@@ -24,8 +24,8 @@ const Modal = (props: Props) => {
     ])
   const imagePickerRef = useRef<HTMLInputElement>(null)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault
-    if (!newTaskInput) return
+    e.preventDefault()
+    // if (!newTaskInput) return
     addTask(newTaskInput, newTaskType, image)
 
     closeModal()

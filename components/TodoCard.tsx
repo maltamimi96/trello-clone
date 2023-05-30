@@ -8,7 +8,7 @@ import {
 } from "react-beautiful-dnd"
 import getUrl from "@/lib/getUrl"
 import Image from "next/image"
-
+import { storage } from "@/appwrite"
 type Props = {
   todo: Todo
   index: number
@@ -31,13 +31,16 @@ const TodoCard = ({
   useEffect(() => {
     if (todo.image) {
       const fetchImage = async () => {
-        const url = await getUrl(todo.image)
-
-        setImageUrl(url.toString())
+        const { image } = todo
+        if (!image) return
+        const url = await getUrl(JSON.parse(image!))
+        console.log("url", url)
+        if (url) setImageUrl(url.toString())
       }
+
       fetchImage()
     }
-  }, [todo.image])
+  }, [todo])
 
   return (
     <div
@@ -54,13 +57,13 @@ const TodoCard = ({
 
       {/* // goes here */}
       {imageUrl && (
-        <div className="relative w-full h-48">
+        <div className=" w-full h-full rounded-b-md">
           <Image
             src={imageUrl}
             alt="task image"
-            width={100}
-            height={100}
-            className="object-contain w-full rounded-b-sm"
+            width={400}
+            height={200}
+            className="w-full object-contain rounded-b-sm"
           />
         </div>
       )}

@@ -13,11 +13,12 @@ type Props = {
 
 const idToColumnText: {
   [key in TypedColumn]: string
-} = { todo: "To Do", inprogress: "In Progress", done: "Done" }
+} = { todo: "ToDo", inprogress: "In Progress", done: "Done" }
 
 const Column = ({ id, todos, index }: Props) => {
   const [searchString] = useBoardStore((state) => [state.searchString])
   const [openModal] = useModalStore((state) => [state.openModal])
+
   return (
     <Draggable draggableId={id} index={index}>
       {(provided) => (
@@ -33,9 +34,9 @@ const Column = ({ id, todos, index }: Props) => {
                 }`}
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
-                <h2 className="flex justify-between font-bold text-xl">
+                <h2 className="flex justify-between  tracking-widest md:ml-4 text-xl">
                   {idToColumnText[id]}
-                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm ">
+                  <span className="text-gray-500 bg-gray-200 rounded-full px-2 py-1 text-sm">
                     {!searchString
                       ? todos.length
                       : todos.filter((todo) =>
@@ -46,34 +47,40 @@ const Column = ({ id, todos, index }: Props) => {
                   </span>
                 </h2>
                 <div className="space-y-2 ">
-                  {todos.map((todo, index) => {
-                    if (
-                      searchString &&
-                      todo.title
-                        .toLowerCase()
-                        .includes(searchString.toLowerCase())
-                    ) {
-                      return null
-                    }
+                  {todos.length < 1 ? (
+                    <div className="text-gray-500 text-center text-xl tracking-widest">
+                      No tasks
+                    </div>
+                  ) : (
+                    todos.map((todo, index) => {
+                      if (
+                        searchString &&
+                        todo.title
+                          .toLowerCase()
+                          .includes(searchString.toLowerCase())
+                      ) {
+                        return null
+                      }
 
-                    return (
-                      <Draggable
-                        key={todo.$id}
-                        draggableId={todo.$id}
-                        index={index}>
-                        {(provided) => (
-                          <TodoCard
-                            todo={todo}
-                            index={index}
-                            id={id}
-                            innerRef={provided.innerRef}
-                            draggableProps={provided.draggableProps}
-                            dragHandleProps={provided.dragHandleProps}
-                          />
-                        )}
-                      </Draggable>
-                    )
-                  })}
+                      return (
+                        <Draggable
+                          key={todo.$id}
+                          draggableId={todo.$id}
+                          index={index}>
+                          {(provided) => (
+                            <TodoCard
+                              todo={todo}
+                              index={index}
+                              id={id}
+                              innerRef={provided.innerRef}
+                              draggableProps={provided.draggableProps}
+                              dragHandleProps={provided.dragHandleProps}
+                            />
+                          )}
+                        </Draggable>
+                      )
+                    })
+                  )}
                   <div>
                     <button
                       className="text-green-500 hover:text-green-600"

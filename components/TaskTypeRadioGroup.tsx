@@ -13,7 +13,7 @@ const types = [
     description: "A new task to complete",
   },
   {
-    id: "in-progress",
+    id: "inprogress",
     name: "In Progress",
     color: "bg-yellow-500",
     description: "A  task being worked on",
