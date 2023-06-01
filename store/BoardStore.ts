@@ -39,12 +39,12 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   // Setters
   setNewTaskType: (type: TypedColumn) => set({ newTaskType: type }), // Sets the type of the new task
   setBoardState: (board: Board) => set({ board }), // Sets the state of the board
-  updateTodoInDB: async (todo, columnId) => {
+  updateTodoInDB: async (todo, columnId, image?: string) => {
     await databeses.updateDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
       process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
       todo.$id,
-      { title: todo.title, status: columnId } // Updates the title and status of a task in the database
+      { title: todo.title, status: columnId, image: image } // Updates the title and status of a task in the database
     )
   },
   setSearchString: (searchString: string) => set({ searchString }), // Sets the search string
