@@ -16,7 +16,13 @@ interface BoardState {
   setNewTaskInput: (input: string) => void // Function to set the input for a new task
   setImage: (image: File | null) => void // Function to set the image file for a task
   getBoard: () => void // Function to fetch the board data
-  deleteTask: (taskIndex: number, todoId: Todo, id: TypedColumn) => void // Function to delete a task
+  deleteTask: (
+    taskIndex: number,
+    todoId: Todo,
+    id: TypedColumn,
+    bucketId: string,
+    fileId: string
+  ) => void // Function to delete a task
   addTask: (todo: string, columnId: TypedColumn, image?: File | null) => void // Function to add a new task
 }
 
@@ -50,17 +56,20 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     const board = await getTodosGroupedByColumns() // Fetches the board data and groups tasks by columns
     set({ board }) // Sets the state of the board
   },
-  deleteTask: async (taskIndex: number, todo: Todo, id: TypedColumn) => {
+  deleteTask: async (
+    taskIndex: number,
+    todo: Todo,
+    id: TypedColumn,
+    bucketId: string,
+    fileId: string
+  ) => {
     const newColumns = new Map<TypedColumn, Column>(get().board.columns) // Creates a copy of the columns map
     newColumns.get(id)!.todos.splice(taskIndex, 1) // Removes the task from the specified column
     set({ board: { columns: newColumns } }) // Updates the state of the board
 
-    // if (todo.image) {
-    //   await storage.deleteFile(
-    //     JSON.parse(todo.image.bucketId),
-    //     JSON.parse(todo.image.fileId)
-    //   ) // Deletes the image file associated with the task from storage
-    // }
+    if (todo.image) {
+      await storage.deleteFile(bucketId, fileId) // Deletes the image file associated with the task from storage
+    }
 
     await databeses.deleteDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,

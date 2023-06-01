@@ -1,5 +1,6 @@
 import Modal from "@/components/Modal"
 import "./globals.css"
+import UpdateModal from "@/components/UpdateModal"
 
 export const metadata = {
   title: "Trello Clone ",
@@ -13,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#F5F6F8] dark:bg-gray-700">
+      <body className="bg-[#F5F6F8] dark:bg-cyan-900">
         {children}
         <Modal />
       </body>

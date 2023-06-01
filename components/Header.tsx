@@ -19,7 +19,7 @@ const Header = (props: Props) => {
         blur-3xl opacity-50 w-full -z-50"
         />
         <div
-          className=" absolute top-0 left-0 h-96 bg-gradient-to-br from-red-900 to-[#a00b30] rounded-md filter
+          className=" absolute top-0 left-0 h-96 bg-gradient-to-br from-sky-900 to-[#1352c9] rounded-md filter
         blur-2xl opacity-50 w-full -z-50"
         />
         <Image
@@ -49,8 +49,8 @@ const Header = (props: Props) => {
           <Avatar name="Mohammad" round color="#0055D1" size="50" />
         </div>
       </div>
-      <div className="flex items-center justify-center px-5 pb-4 md:py-5 ">
-        <p className="flex items-center text-sm bg-white dark:bg-gray-600 dark:text-red-400  font-semibold max-w-3xl italic drop-shadow-lg rounded-full px-4 py-2 ">
+      <div className="flex items-center justify-center px-5 pb-4  md:py-5 ">
+        <p className="flex items-center text-sm bg-white dark:bg-gray-600 dark:text-sky-400  font-semibold max-w-3xl italic drop-shadow-lg rounded-full px-4 py-2 ">
           <UserCircleIcon className="inline-block h-10 w-10  text-[#0055D1] dark:text-gray-200 mr-1" />
           Welcome to Trello Clone
         </p>
