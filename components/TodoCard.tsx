@@ -10,8 +10,7 @@ import {
 } from "react-beautiful-dnd"
 import getUrl from "@/lib/getUrl"
 import Image from "next/image"
-import { storage } from "@/appwrite"
-import UpdateModal from "./UpdateModal"
+
 type Props = {
   todo: Todo
   index: number
@@ -29,7 +28,11 @@ const TodoCard = ({
   draggableProps,
   dragHandleProps,
 }: Props) => {
-  const [deleteTask] = useBoardStore((state) => [state.deleteTask])
+  const [deleteTask, fetchId, setFetchId] = useBoardStore((state) => [
+    state.deleteTask,
+    state.fetchId,
+    state.setFetchId,
+  ])
   const [openModal, closeModal] = useUpdateModalStore((state) => [
     state.openModal,
     state.closeModal,
@@ -61,8 +64,13 @@ const TodoCard = ({
       {...dragHandleProps}
       ref={innerRef}>
       <div className="flex justify-between items-center p-5 rounded-sm">
-        <p className="font-semibold text-sm bg  ">
-          <button className="hover:scale-105 " onClick={openModal}>
+        <p className="font-semibold text-sm  ">
+          <button
+            className="hover:scale-105 "
+            onClick={() => {
+              setFetchId(todo.$id)
+              openModal()
+            }}>
             {todo.title}
           </button>
         </p>
@@ -86,7 +94,6 @@ const TodoCard = ({
           />
         </div>
       )}
-      <UpdateModal todo={todo} tdImg={imageUrl} />
     </div>
   )
 }

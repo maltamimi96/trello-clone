@@ -24,6 +24,8 @@ interface BoardState {
     fileId: string
   ) => void // Function to delete a task
   addTask: (todo: string, columnId: TypedColumn, image?: File | null) => void // Function to add a new task
+  fetchId: string
+  setFetchId: (id: string) => void
 }
 
 export const useBoardStore = create<BoardState>((set, get) => ({
@@ -35,6 +37,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   searchString: "", // Initial value for search string
   newTaskType: "todo", // Initial value for new task type
   image: null, // Initial value for image file
+  fetchId: "",
 
   // Setters
   setNewTaskType: (type: TypedColumn) => set({ newTaskType: type }), // Sets the type of the new task
@@ -44,12 +47,13 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       process.env.NEXT_PUBLIC_DATABASE_ID!,
       process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!,
       todo.$id,
-      { title: todo.title, status: columnId, image: image } // Updates the title and status of a task in the database
+      { title: todo.title, status: columnId, image: image || "" } // Updates the title and status of a task in the database
     )
   },
   setSearchString: (searchString: string) => set({ searchString }), // Sets the search string
   setNewTaskInput: (input: string) => set({ newTaskInput: input }), // Sets the input for a new task
   setImage: (image: File | null) => set({ image }), // Sets the image file for a task
+  setFetchId: (id: string) => set({ fetchId: id }),
 
   // Actions
   getBoard: async () => {
