@@ -126,8 +126,6 @@ export const useBoardStore = create<BoardState>((set, get) => ({
         newColumns.get(columnId)?.todos.push(newTodo) // Adds the new task to the existing column
       }
 
-      console.log("Uploading ")
-
       return { board: { columns: newColumns } } // Updates the state of the board
     })
   },

@@ -55,7 +55,6 @@ const UpdateModal = ({ todo, tdImg }: Props) => {
   useEffect(() => {
     const getTodo = async () => {
       const todo = await fetchTodo(fetchId)
-      console.log(todo)
       if (!todo) return
       setDoc({
         $createdAt: todo.$createdAt,
